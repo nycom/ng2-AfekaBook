@@ -1,0 +1,71 @@
+<div class="page-header">
+    <h1>{{user.first_name + " " + user.last_name}}
+        <small>Profile Page</small>
+    </h1>
+</div>
+<div class="row">
+    <div class="col-md-3">
+        <img src="{{user.image_url}}" alt="UserImage" class="img-thumbnail">
+        <br>
+        <div *ngIf="!isCurrentUser && !friendExistsFlag">
+            <button class="btn btn-primary btn-block" (click)="addFriend()">Add Friend</button>
+        </div>
+        <div *ngIf="!isCurrentUser && friendExistsFlag">
+            <button class="btn btn-primary btn-block" (click)="unFriend()">Delete Friend</button>
+        </div>
+        <div *ngIf="isCurrentUser">
+            <!--<button class="btn btn-primary btn-block" (click)="changeProfileImage()">Change Profile Image</button>-->
+            <input type="file" id="selectedFile" style="display: none;" ng2FileSelect [uploader]="uploader"/>
+            <input class="btn btn-primary btn-block" type="button" value="Change Profile Image" onclick="document.getElementById('selectedFile').click();" />
+        </div>
+
+        <div *ngIf="isCurrentUser">
+            <button class="btn btn-primary btn-block" style="margin-top: 5px" (click)="routeToEditDetails()">Edit User Details</button>
+        </div>
+    </div>
+
+    <div class="col-md-6 well">
+        <h2>Details</h2>
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <h3 class="panel-title">First Name:</h3>
+            </div>
+            <div class="panel-body">
+                {{user.first_name}}
+            </div>
+        </div>
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <h3 class="panel-title">Last Name:</h3>
+            </div>
+            <div class="panel-body">
+                {{user.last_name}}
+            </div>
+        </div>
+
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <h3 class="panel-title">Email:</h3>
+            </div>
+            <div class="panel-body">
+                {{user.email}}
+            </div>
+        </div>
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <h3 class="panel-title">Gender:</h3>
+            </div>
+            <div class="panel-body">
+                {{user.sex}}
+            </div>
+        </div>
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <h3 class="panel-title">Address:</h3>
+            </div>
+            <div class="panel-body">
+                {{user.address}}
+            </div>
+        </div>
+    </div>
+</div>

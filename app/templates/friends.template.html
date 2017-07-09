@@ -1,0 +1,27 @@
+<div class="container-fluid" style="margin-top: 30px">
+<h1>These Are Your Friends:</h1>
+
+<table class="table table-bordered" style="margin-top: 30px">
+    <thead>
+    <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Gender</th>
+        <th>Unfriend</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let friend of friends">
+        <td>{{ friend.users[0].first_name }}</td>
+        <td>{{ friend.users[0].last_name }}</td>
+        <td>{{ friend.users[0].email }}</td>
+        <td>{{ friend.users[0].sex }}</td>
+
+        <td>
+            <i (click)="unFriend(friend)" class="glyphicon glyphicon-remove clickable"></i>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</div>

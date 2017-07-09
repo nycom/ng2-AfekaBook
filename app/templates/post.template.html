@@ -1,0 +1,59 @@
+<div class="media post">
+    <div class="media-left">
+        <a [routerLink]="['Profile', { id: post.user_id }]">
+            <img class="media-object img-rounded my-thumbnail" src={{post.users[0].image_url}} alt="...">
+        </a>
+    </div>
+    <div class="media-body">
+        <a [routerLink]="['Profile', { id: post.user_id }]">
+            <h4 class="media-heading username" >{{post.users[0].first_name + " " + post.users[0].last_name}}</h4>
+        </a>
+        <p class="comment-body">{{post.body}}</p>
+
+        <div style="margin-top: 10px; margin-bottom: 10px;">
+            <post-images [images]="postImages"></post-images>
+        </div>
+        <div class="post-info">
+            <like [totalLikes]="totalLikes" [iLike]="isLiked" [post_id]="post.post_id" [likes]="post.likes" ></like>
+            <span *ngIf="localUser.user_id === post.user_id">
+                   <select [(ngModel)]="post.is_public" class="custom-select" (blur)="updatePost()">
+                                <option value="1">Public</option>
+                                <option value="0">Private</option>
+                   </select>
+            </span>
+            <span class="small" style="float: right">
+                        <span class="glyphicon glyphicon-globe"></span>
+                        posted in {{post.date_created}}</span>
+        </div>
+        <spinner [visible]="commentsLoading"></spinner>
+        <ul class="media-list img-rounded comments">
+            <li class="media comment" *ngFor="let comment of comments">
+                <div class="media-left">
+                    <img class="media-object img-rounded my-thumbnail" src={{comment.users[0].image_url}} alt="u-img">
+                </div>
+                <div class="media-body">
+                    <h5 class="media-heading username">{{comment.users[0].first_name + " " + comment.users[0].last_name}}</h5>
+                    <p class="comment-body">{{comment.body}}</p>
+                </div>
+            </li>
+        </ul>
+        <form [ngFormModel]="form" class="form-inline comment" (ngSubmit)="onSubmit(form.value)">
+            <div class="form-group">
+                <img class="img-rounded my-thumbnail" for="comment-area" src="{{localUser.image_url}}">
+                <textarea rows="1"
+                          cols="58"
+                          [(ngModel)]="body"
+                          #commentArea="ngForm"
+                          ngControl="commentArea"
+                          required
+                          class="form-control"
+                          id="commentArea"
+                          placeholder="Comment"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+        </form>
+
+
+    </div>
+
+</div>
